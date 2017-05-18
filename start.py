@@ -59,10 +59,11 @@ while is_running:
 
     #Top Button
 
-    if 1150+50 > MOUSE[0] > 1150 and 400+50 > MOUSE[1] > 400:
+    if 1150+50 > MOUSE[0] > 1150 and 400+50 > MOUSE[1] > 400 and CLICK[0] == 1:
         pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 400, 50, 50))
-        if CLICK[0] == 1:
-            CordY + 1
+        CordY + 1
+    elif 1150+50 > MOUSE[0] > 1150 and 400+50 > MOUSE[1] > 400:
+        pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 400, 50, 50))
     else:
         pygame.draw.rect(SCREEN, GRAY, (1150, 400, 50, 50))
 
@@ -88,7 +89,7 @@ while is_running:
 
     SCREEN.blit(Label, (45, 575))
 
-    print(CordY)
+    print(CLICK)
 
     pygame.display.update()
     CLOCK.tick(60)
