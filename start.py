@@ -2,6 +2,11 @@ import pygame
 
 pygame.init()
 
+# - - - - - Variables - - - - -
+
+global CordX
+global CordY
+
 CordX = 0
 CordY = 0
 
@@ -10,8 +15,6 @@ MainText = "This is a variable"
 WIDTH = 1280
 HEIGHT = 720
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-
-pygame.display.set_caption('Ratscape')
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -22,12 +25,14 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 255)
 
-FONT = pygame.font.SysFont("Arial", 26)
-ButtonFont = pygame.font.SysFont("Arial", 12)
-
 CLOCK = pygame.time.Clock()
 
-SCREEN.fill(WHITE)
+
+# - - - - - - Screen - - - - - - -
+pygame.display.set_caption('Ratscape')
+
+FONT = pygame.font.SysFont("Arial", 26)
+ButtonFont = pygame.font.SysFont("Arial", 12)
 
 pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
 pygame.draw.rect(SCREEN, GREEN, (590, 310, 50, 50))
@@ -36,7 +41,10 @@ pygame.display.flip()
 
 is_running = True
 
+# - - - - - - Definitions - - - - -
+
 #  - - - - GAME LOOP - - - -
+
 while is_running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -46,30 +54,26 @@ while is_running:
             print(event)
 
     MOUSE = pygame.mouse.get_pos()
+    CLICK = pygame.mouse.get_pressed()
 
-#Right Button
-    if 1200+50 > MOUSE[0] > 1200 and 450+50 > MOUSE[1] > 450:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1200, 450, 50, 50))
-    else:
-        pygame.draw.rect(SCREEN, GRAY, (1200, 450, 50, 50))
 
-#Top Button
+    #Top Button
+
     if 1150+50 > MOUSE[0] > 1150 and 400+50 > MOUSE[1] > 400:
         pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 400, 50, 50))
+        if CLICK[0] == 1:
+            CordY + 1
     else:
         pygame.draw.rect(SCREEN, GRAY, (1150, 400, 50, 50))
 
-#Bottom Button
-    if 1150+50 > MOUSE[0] > 1150 and 500+50 > MOUSE[1] > 500:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 500, 50, 50))
-    else:
-        pygame.draw.rect(SCREEN, GRAY, (1150, 500, 50, 50))
+    #Bottom Button
+    #button(1150, 500, 50, 50, HOVER_GRAY, GRAY)
 
-#Left Button
-    if 1100+50 > MOUSE[0] > 1100 and 450+50 > MOUSE[1] > 450:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1100, 450, 50, 50))
-    else:
-        pygame.draw.rect(SCREEN, GRAY, (1100, 450, 50, 50))
+    #Left Button
+    #button(1100, 450, 50, 50, HOVER_GRAY, GRAY)
+
+    # Right Button
+    #button(1200, 450, 50, 50, HOVER_GRAY, GRAY)
 
     UpButtonText = ButtonFont.render("UP", 1, (0, 0, 0))
     DownButtonText= ButtonFont.render("DOWN", 1, (0, 0, 0))
@@ -83,6 +87,8 @@ while is_running:
     SCREEN.blit(RightButtonText, (1205, 470))
 
     SCREEN.blit(Label, (45, 575))
+
+    print(CordY)
 
     pygame.display.update()
     CLOCK.tick(60)
