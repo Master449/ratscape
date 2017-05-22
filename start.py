@@ -37,11 +37,13 @@ ButtonFont = pygame.font.SysFont("Arial", 12)
 pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
 pygame.draw.rect(SCREEN, GREEN, (590, 310, 50, 50))
 
+pygame.display.flip()
+
 is_running = True
 
 # - - - - - - Definitions - - - - -
 
-#  - - - - - - GAME LOOP - - - - -
+#  - - - - GAME LOOP - - - -
 
 while is_running:
     for event in pygame.event.get():
@@ -54,41 +56,25 @@ while is_running:
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
 
-    # Top Button
+
+    #Top Button
+
     if 1150+50 > MOUSE[0] > 1150 and 400+50 > MOUSE[1] > 400 and CLICK[0] == 1:
         pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 400, 50, 50))
-        CordY = CordY + 1
+        CordY + 1
     elif 1150+50 > MOUSE[0] > 1150 and 400+50 > MOUSE[1] > 400:
         pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 400, 50, 50))
     else:
         pygame.draw.rect(SCREEN, GRAY, (1150, 400, 50, 50))
 
-    # Bottom Button
-    if 1150+50 > MOUSE[0] > 1150 and 500+50 > MOUSE[1] > 500 and CLICK[0] == 1:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 500, 50, 50))
-        CordY = CordY - 1
-    elif 1150+50 > MOUSE[0] > 1150 and 500+50 > MOUSE[1] > 500:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1150, 500, 50, 50))
-    else:
-        pygame.draw.rect(SCREEN, GRAY, (1150, 500, 50, 50))
+    #Bottom Button
+    #button(1150, 500, 50, 50, HOVER_GRAY, GRAY)
 
-    # Left Button
-    if 1100+50 > MOUSE[0] > 1100 and 450+50 > MOUSE[1] > 450 and CLICK[0] == 1:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1100, 450, 50, 50))
-        CordX = CordX - 1
-    elif 1100+50 > MOUSE[0] > 1100 and 450+50 > MOUSE[1] > 450:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1100, 450, 50, 50))
-    else:
-        pygame.draw.rect(SCREEN, GRAY, (1100, 450, 50, 50))
+    #Left Button
+    #button(1100, 450, 50, 50, HOVER_GRAY, GRAY)
 
     # Right Button
-    if 1200+50 > MOUSE[0] > 1200 and 450+50 > MOUSE[1] > 450 and CLICK[0] == 1:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1200, 450, 50, 50))
-        CordX = CordX + 1
-    elif 1200+50 > MOUSE[0] > 1200 and 450+50 > MOUSE[1] > 450:
-        pygame.draw.rect(SCREEN, HOVER_GRAY, (1200, 450, 50, 50))
-    else:
-        pygame.draw.rect(SCREEN, GRAY, (1200, 450, 50, 50))
+    #button(1200, 450, 50, 50, HOVER_GRAY, GRAY)
 
     UpButtonText = ButtonFont.render("UP", 1, (0, 0, 0))
     DownButtonText= ButtonFont.render("DOWN", 1, (0, 0, 0))
@@ -103,8 +89,7 @@ while is_running:
 
     SCREEN.blit(Label, (45, 575))
 
-    print(CordX)
-    print(CordY)
+    print(CLICK)
 
     pygame.display.update()
     CLOCK.tick(60)
