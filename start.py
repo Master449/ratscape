@@ -15,7 +15,9 @@ Magic = 200
 
 gold = 0
 
-MainText = "This is a variable"
+global MainText
+
+MainText = ""
 
 WIDTH = 1280
 HEIGHT = 720
@@ -75,9 +77,19 @@ def DrawHUD():
     pygame.draw.rect(SCREEN, GRAY, (448, 543, 200, 24))
     pygame.draw.rect(SCREEN, BLUE, (448, 543, Magic, 24))
 
-    # Map
-
+    #Map
     pygame.draw.rect(SCREEN, GREEN, (590, 310, 50, 50))
+
+def HealthCheck():
+    if Health == 0:
+        MainText = "Game Over"
+
+
+def RoomCheck():
+    if CordY == 1 and CordX == 1:
+        MainText = "Give Succ"
+
+
 
 #  - - - - - - GAME LOOP - - - - -
 
@@ -116,11 +128,12 @@ while is_running:
             pygame.draw.rect(SCREEN, GRAY, (1100, 450, 50, 50))
             pygame.draw.rect(SCREEN, GRAY, (1200, 450, 50, 50))
 
-
+    RoomCheck()
     DrawHUD()
 
     print(CordX)
     print(CordY)
+    print(MainText)
 
     pygame.display.update()
     CLOCK.tick(60)
