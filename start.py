@@ -10,19 +10,22 @@ global CordY
 CordX = 0
 CordY = 0
 
-# I made these global just in case. You can change that if everything works fine without them being global.
-
 global Health
 Health = 200
+
 global Magic
 Magic = 200
 
 global gold
 gold = 0
 
-global MainText
+global TextLine1
+global TextLine2
+global TextLine3
 
-MainText = ""
+TextLine1 = " "
+TextLine2 = " "
+TextLine3 = " "
 
 WIDTH = 1280
 HEIGHT = 720
@@ -37,6 +40,8 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 255)
 
+is_running = True
+
 CLOCK = pygame.time.Clock()
 
 
@@ -48,8 +53,6 @@ FONT = pygame.font.SysFont("Arial", 26)
 ButtonFont = pygame.font.SysFont("Arial", 12)
 
 pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
-
-is_running = True
 
 # - - - - - - Definitions - - - - -
 
@@ -63,7 +66,9 @@ def DrawHUD():
     MPBar = FONT.render("MP: ", 16, BLACK)
     GoldLabel = FONT.render("Gold: ", 16, BLACK)
     GoldAmount = FONT.render(str(gold), 1024, BLACK)
-    Label = FONT.render(MainText, 1, (255, 255, 255))
+    Label = FONT.render(TextLine1, 1, (255, 255, 255))
+    Label2 = FONT.render(TextLine2, 1, (255, 255, 255))
+    Label3 = FONT.render(TextLine3, 1, (255, 255, 255))
 
     SCREEN.blit(UpButtonText, (1167, 420))
     SCREEN.blit(DownButtonText, (1155, 520))
@@ -75,6 +80,8 @@ def DrawHUD():
     SCREEN.blit(MPBar, (400, 540))
     SCREEN.blit(HealthBar, (40, 540))
     SCREEN.blit(Label, (45, 575))
+    SCREEN.blit(Label2, (45, 605))
+    SCREEN.blit(Label3, (45, 635))
 
     pygame.draw.rect(SCREEN, GRAY, (84, 543, 200, 24))
     pygame.draw.rect(SCREEN, RED, (84, 543, Health, 24))
@@ -82,30 +89,47 @@ def DrawHUD():
     pygame.draw.rect(SCREEN, GRAY, (448, 543, 200, 24))
     pygame.draw.rect(SCREEN, BLUE, (448, 543, Magic, 24))
 
-    #Map
     pygame.draw.rect(SCREEN, GREEN, (590, 310, 50, 50))
+
+
+# Thanks Anthony for fixing the text bugs!
 
 def HealthCheck():
     if Health <= 0:
-        MainText = "Game Over"
-        # Once a blit is shown on screen, it becomes part of it and can't be changed. So you have to blit it again to show the change.
-        Label = FONT.render(MainText, 1, (255, 255, 255))
+        TextLine1 = "Game Over"
+        Label = FONT.render(TextLine1, 1, (255, 255, 255))
         SCREEN.blit(Label, (45, 575))
 
 
 def RoomCheck():
     if CordY == 1 and CordX == 1:
-        MainText = "Give Succ"
-        Label = FONT.render(MainText, 1, (255, 255, 255))
+        TextLine1 = "Give Succ"
+        TextLine2 = " "
+        TextLine3 = " "
+
+        pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
+
+        Label = FONT.render(TextLine1, 1, (255, 255, 255))
         SCREEN.blit(Label, (45, 575))
+        Label2 = FONT.render(TextLine2, 1, (255, 255, 255))
+        SCREEN.blit(Label2, (45, 605))
+        Label3 = FONT.render(TextLine3, 1, (255, 255, 255))
+        SCREEN.blit(Label3, (45, 635))
 
     if CordY != 1 or CordX != 1:
-        MainText = ""
-        # I don't know how to delete the last blited text, so I just drew over it.
-        pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
-        Label = FONT.render(MainText, 1, (255, 255, 255))
-        SCREEN.blit(Label, (45, 575))
+        TextLine1 = "Welcome to Ratscape, You are currently in the starting room."
+        TextLine2 = "Use the controls off to the right hand side to move to different rooms."
+        TextLine3 = "As you progress you will aquire treasure and fight monsters"
 
+        pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
+
+        pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
+        Label = FONT.render(TextLine1, 1, (255, 255, 255))
+        SCREEN.blit(Label, (45, 575))
+        Label2 = FONT.render(TextLine2, 1, (255, 255, 255))
+        SCREEN.blit(Label2, (45, 605))
+        Label3 = FONT.render(TextLine3, 1, (255, 255, 255))
+        SCREEN.blit(Label3, (45, 635))
 
 #  - - - - - - GAME LOOP - - - - -
 
@@ -149,7 +173,7 @@ while is_running:
 
     print(CordX)
     print(CordY)
-    print(MainText)
+    print(TextLine1)
 
     pygame.display.update()
     CLOCK.tick(60)
