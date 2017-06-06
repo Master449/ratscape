@@ -42,8 +42,8 @@ CLOCK = pygame.time.Clock()
 
 # - - - - - - Screen - - - - - - -
 pygame.display.set_caption('Ratscape')
-
 SCREEN.fill(WHITE)
+
 FONT = pygame.font.SysFont("Arial", 26)
 ButtonFont = pygame.font.SysFont("Arial", 12)
 
@@ -85,32 +85,10 @@ def DrawHUD():
     #Map
     pygame.draw.rect(SCREEN, GREEN, (590, 310, 50, 50))
 
-def HealthCheck():
-    if Health <= 0:
-        MainText = "Game Over"
-        # Once a blit is shown on screen, it becomes part of it and can't be changed. So you have to blit it again to show the change.
-        Label = FONT.render(MainText, 1, (255, 255, 255))
-        SCREEN.blit(Label, (45, 575))
+def events():
 
-
-def RoomCheck():
-    if CordY == 1 and CordX == 1:
-        MainText = "Give Succ"
-        Label = FONT.render(MainText, 1, (255, 255, 255))
-        SCREEN.blit(Label, (45, 575))
-
-    if CordY != 1 or CordX != 1:
-        MainText = ""
-        # I don't know how to delete the last blited text, so I just drew over it.
-        pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
-        Label = FONT.render(MainText, 1, (255, 255, 255))
-        SCREEN.blit(Label, (45, 575))
-
-
-#  - - - - - - GAME LOOP - - - - -
-
-while is_running:
-
+    global CordX
+    global CordY
     MOUSE = pygame.mouse.get_pos()
     CLICK = pygame.mouse.get_pressed()
 
@@ -144,12 +122,36 @@ while is_running:
             pygame.draw.rect(SCREEN, GRAY, (1100, 450, 50, 50))
             pygame.draw.rect(SCREEN, GRAY, (1200, 450, 50, 50))
 
+def HealthCheck():
+    if Health <= 0:
+        MainText = "Game Over"
+        # Once a blit is shown on screen, it becomes part of it and can't be changed. So you have to blit it again to show the change.
+        Label = FONT.render(MainText, 1, (255, 255, 255))
+        SCREEN.blit(Label, (45, 575))
+
+
+def RoomCheck():
+    if CordY == 1 and CordX == 1:
+        MainText = "Give Succ"
+        Label = FONT.render(MainText, 1, (255, 255, 255))
+        SCREEN.blit(Label, (45, 575))
+
+    if CordY != 1 or CordX != 1:
+        MainText = ""
+        # I don't know how to delete the last blited text, so I just drew over it.
+        pygame.draw.rect(SCREEN, BLACK, (40, 570, 1200, 120))
+        Label = FONT.render(MainText, 1, (255, 255, 255))
+        SCREEN.blit(Label, (45, 575))
+
+
+#  - - - - - - GAME LOOP - - - - -
+
+while is_running:
+
+    events()
+    HealthCheck()
     RoomCheck()
     DrawHUD()
-
-    print(CordX)
-    print(CordY)
-    print(MainText)
 
     pygame.display.update()
     CLOCK.tick(60)
