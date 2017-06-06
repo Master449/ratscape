@@ -53,6 +53,9 @@ CLOCK = pygame.time.Clock()
 
 def DrawHUD():
     SCREEN.fill(WHITE)
+    global TextLine1
+    global TextLine2
+    global TextLine3
 
     #Hover effect on the positional keys
 
@@ -128,13 +131,17 @@ def DrawHUD():
 
     pygame.display.update()
 
-# Sorry Anthony, the bugs are back :(
-
 def HealthCheck():
+    global TextLine1
+    global TextLine2
+    global TextLine3
     if Health <= 0:
         TextLine1 = "Game Over"
 
 def RoomCheck():
+    global TextLine1
+    global TextLine2
+    global TextLine3
     if CordX == 1 and CordY == 1:
         TextLine1 = "Oh Yeah"
 
@@ -162,8 +169,8 @@ while is_running:
             pygame.draw.rect(SCREEN, HOVER_GRAY, (1200, 450, 50, 50))
             CordX = CordX + 1
 
-    RoomCheck()
     DrawHUD()
+    RoomCheck()
     HealthCheck()
 
     CLOCK.tick(60)
