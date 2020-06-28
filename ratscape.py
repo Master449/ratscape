@@ -1,24 +1,11 @@
 import pygame
+import random
 
 pygame.init()
 
 # - - - - - Variables - - - - -
 
-global CordX
-global CordY
-
-CordX = 0
-CordY = 0
-
-global Health
-Health = 200
-
-global Magic
-Magic = 200
-
-global gold
-gold = 0
-
+# Screen
 global TextLine1
 global TextLine2
 global TextLine3
@@ -40,16 +27,13 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 255)
 
+pygame.display.set_caption('Ratscape')
+CLOCK = pygame.time.Clock()
+
 global FONT
 
 FONT = pygame.font.SysFont("Arial", 26)
 ButtonFont = pygame.font.SysFont("Arial", 12)
-
-is_running = True
-pygame.display.set_caption('Ratscape')
-CLOCK = pygame.time.Clock()
-
-# - - - - - - Definitions - - - - -
 
 def DrawHUD():
     SCREEN.fill(WHITE)
@@ -91,8 +75,45 @@ def DrawHUD():
     pygame.draw.rect(SCREEN, GREEN, (590, 310, 50, 50))
 
     pygame.display.update()
-#  - - - - - - GAME LOOP - - - - -
 
+def genBool(b):
+    b = random.choice([true, false])
+    return b
+
+# Game
+global CordX
+global CordY
+CordX = 0
+CordY = 0
+
+global Health
+Health = 200
+
+global Magic
+Magic = 200
+
+global gold
+gold = 0
+
+
+# - - - - - - Classes - - - - - - - 
+class Room:
+    def __init__(x, y, enemy, moneyLoot, enemyLoot, blockFront, blockBack, blockRight, blockLeft, visited):
+        self.x = x
+        self.y = = y
+        self.enemy = enemy
+        self.moneyLoot = moneyLoot
+        self.enemyLoot = enemyLoot
+
+        self.blockFront = blockFront
+        self.blockBack = blockBack
+        self.blockRight = blockRight
+        self.blockLeft = blockLeft
+
+        self.visited = visted
+
+#  - - - - - - GAME LOOP - - - - -
+is_running = True
 while is_running:
 
     MOUSE = pygame.mouse.get_pos()
@@ -111,6 +132,10 @@ while is_running:
                 CordX -= 1
             if event.key == pygame.K_d:
                 CordX += 1
+
+    roomName = str(CordX) + "-" + str(CordY)
+
+    if(roomName = 
                 
     DrawHUD()
 
