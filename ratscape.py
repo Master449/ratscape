@@ -35,6 +35,8 @@ global FONT
 FONT = pygame.font.SysFont("Arial", 26)
 ButtonFont = pygame.font.SysFont("Arial", 12)
 
+
+
 def DrawHUD():
     SCREEN.fill(WHITE)
     global TextLine1
@@ -76,10 +78,36 @@ def DrawHUD():
 
     pygame.display.update()
 
+# - - - - - - Classes - - - - - - - 
+class Room:
+    def __init__(x, y, enemy, moneyLoot, enemyLoot, blockFront, blockBack, blockRight, blockLeft, visited):
+        self.x = x
+        self.y = y
+        self.enemy = enemy
+        self.moneyLoot = moneyLoot
+        self.enemyLoot = enemyLoot
+
+        self.blockFront = blockFront
+        self.blockBack = blockBack
+        self.blockRight = blockRight
+        self.blockLeft = blockLeft
+
+        self.visited = visted
+
+        
+# - - - - - - Definitions - - - - - -
 def genBool(b):
     b = random.choice([true, false])
     return b
 
+def roomVisited(x, y):
+    roomName = str(x) + "-" + str(y)
+    exists = hasattr(roomName, 'visited')
+    if (exists == False):
+        print("generate room")
+    else:
+        print('fuck')
+        
 # Game
 global CordX
 global CordY
@@ -95,23 +123,6 @@ Magic = 200
 global gold
 gold = 0
 
-
-# - - - - - - Classes - - - - - - - 
-class Room:
-    def __init__(x, y, enemy, moneyLoot, enemyLoot, blockFront, blockBack, blockRight, blockLeft, visited):
-        self.x = x
-        self.y = = y
-        self.enemy = enemy
-        self.moneyLoot = moneyLoot
-        self.enemyLoot = enemyLoot
-
-        self.blockFront = blockFront
-        self.blockBack = blockBack
-        self.blockRight = blockRight
-        self.blockLeft = blockLeft
-
-        self.visited = visted
-
 #  - - - - - - GAME LOOP - - - - -
 is_running = True
 while is_running:
@@ -126,16 +137,16 @@ while is_running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 CordY += 1
+                roomVisited(CordX, CordY)
             if event.key == pygame.K_s:
                 CordY -= 1
+                roomVisited(CordX, CordY)
             if event.key == pygame.K_a:
                 CordX -= 1
+                roomVisited(CordX, CordY)
             if event.key == pygame.K_d:
                 CordX += 1
-
-    roomName = str(CordX) + "-" + str(CordY)
-
-    if(roomName = 
+                roomVisited(CordX, CordY)
                 
     DrawHUD()
 
